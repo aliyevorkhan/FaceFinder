@@ -1,36 +1,45 @@
-<h2 style="text-align: center;">Face Finder</h2>
-<br />
-<h4><i>Description: ####</i></h4>
+# Face Finder
 
-<h4>Required libraries:</h4>
-<ul>
-    <li>face_recognition</li>
-    <li>Flask</li>
-    <li>OpenCV</li>
-    <li>numpy</li>
-    <li>PIL</li>
-    <li>base64</li>
-    <li>datetime</li>
-    <li>os</li>
-</ul>
+Face Finder is a face find application which is working on web.
 
-<h4>Directory Tree:</h4>
-<ul>
-    <li>static</li>
-    <ul>
-        <li>resultX.jpg</li>
-        <li>resultY.jpg</li>
-        <li>resultZ.jpg</li>
-        <li style="padding-left: 25px;">...</li>
-    </ul>
-    <li>templates</li>
-    <ul>
-        <li>index.html</li>
-        <li>result.html</li>
-        <li>previous.html</li>
-    </ul>
-    <li>app.py</li>
-</ul>
+## Required libraries
 
-<h4>Usage:</h4>
-    `TYPE SOME CODE HERE`
+For use this application you must own or install these libraries : 
+
+[face_recognition](https://github.com/ageitgey/face_recognition)
+
+[Flask](https://pypi.org/project/Flask/)
+
+[OpenCV](https://pypi.org/project/Flask/)
+
+[numpy](https://pypi.org/project/numpy/)
+
+[Pillow](https://pypi.org/project/Pillow/)
+
+
+## Usage
+
+```bash
+flask run
+```
+Application run on your machine: **127.0.0.1:5000**
+
+When you visit this address you will see output below:
+
+![MainPage](outputs/1.png)
+
+You can see two upload buttons for upload images. First button is using for upload searched image. Second is using for upload group image which is include or not include searched face. Also you can check uploaded image is right image or not from preview partition. When you upload images right you can click Find button:
+
+
+![UploadedImages](outputs/2.png)
+
+After process of recognition, application routing you to Result page. 
+
+
+You can see matched face(s) and their similarity scores on image. Result page output displayed as below: 
+
+![Results](outputs/3.png)
+
+Additionally you can check previous results from Previous Results page. 
+
+![PreviousResults](outputs/4.png)

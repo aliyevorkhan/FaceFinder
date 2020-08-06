@@ -100,12 +100,12 @@ def recognition(searchedFace, groupFace):
         similarityScore = str(int((1-faceConfidence[count])*100))
 
         # Draw a box around the face
-        cv2.rectangle(groupFaceImg, (left, top), (right, bottom), color, 5)
+        cv2.rectangle(groupFaceImg, (left, top), (right, bottom), color, 3)
 
         # Draw a label with a name below the face
         cv2.rectangle(groupFaceImg, (left, bottom - 40), (right, bottom), color, cv2.FILLED)
         font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(groupFaceImg, name + " -> " + similarityScore + " %", (left + 6, bottom - 6), font, 1, (255, 255, 255), 3)
+        cv2.putText(groupFaceImg, similarityScore + " %", (left + 6, bottom - 6), font, 0.7, (255, 255, 255), 1)
         count+=1
 
     cv2.imwrite("static/result" + datetime.utcnow().strftime('%B%d%Y%H%M%S') +".jpg", groupFaceImg)
