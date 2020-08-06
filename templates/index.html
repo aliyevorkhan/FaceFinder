@@ -1,0 +1,90 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Find Face in Image!</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Face Finder</a>
+      <a class="navbar-brand" href="/previous">Previous Results</a>
+    </nav>
+    <br/>
+    <h2 style="text-align: center;">Face Finder App.</h2>
+    <br/>
+    <form method="POST" enctype="multipart/form-data">
+      
+      <div class="container">
+          
+        <br/>
+          <div class="row">
+            <div class="col-sm">
+              <div class="custom-file">
+                <input type="file" id="imgInp1" class="custom-file-input" name="searchedFace">
+                <label class="custom-file-label" for="imgInp1">Upload searched face</label>
+              </div>
+            </div> 
+            <div class="col-sm">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imgInp2" name="groupFace">
+                <label class="custom-file-label" for="imgInp2">Upload group of faces</label>
+              </div>
+            </div> 
+            <div class="col-sm">
+              <div class="custom-file">
+                <input type="submit" class="btn btn-success" value="Upload">
+              </div>
+            </div>  
+          </div>
+          <br/>
+          <br/>
+          <h4 style="text-align: center;">Uploaded Image Preview:</h4>
+          <div class="row">
+            <img id="blah" src="#" class="rounded mx-auto d-block" alt="" width="30%" height="30%" />
+          </div>
+      </div>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          $('#blah').attr('src', e.target.result);
+        } 
+
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+
+    $("#imgInp1").change(function() {
+      readURL(this);
+    });
+
+    $("#imgInp2").change(function() {
+      readURL(this);
+    });
+    </script>
+    <script>
+      // Add the following code if you want the name of the file appear on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      </script>
+  </body>
+</html>

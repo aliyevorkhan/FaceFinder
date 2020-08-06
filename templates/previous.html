@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Previous Results Page</title>
+</head>
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Face Finder</a>
+  <a class="navbar-brand" href="/previous">Previous Results</a>
+</nav>
+<br />
+<h2 style="text-align: center;">Face Finder App.</h2>
+<br />
+
+<div class="container">
+  <div class="row text-center text-lg-left">
+    {% for file in files %}
+    <div class="col-lg-3 col-md-4 col-6">
+      <img class="img-fluid img-thumbnail" src="{{url_for('static', filename=file)}}">
+    </div>
+    {%endfor%}
+  </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+  data = "{{data}}"
+  data = data.replace("b&#39;", "") //to get rid of start curly brace code 
+  data = data.replace("&#39;", "")  //to get rid of end curly bracecode 
+
+  document.getElementById("img").src = "data:image/png;base64," + data; // set src
+</script>
+
+</body>
+
+</html>
