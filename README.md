@@ -1,6 +1,10 @@
 # Face Finder
 
-Face Finder is a face find application which is working on web.
+Web based face finding application.
+
+## Demo
+
+![Demo](outputs/demo.gif)
 
 ## Required libraries
 
