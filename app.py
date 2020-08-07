@@ -54,7 +54,6 @@ def upload_image():
 def recognition(searchedFace, groupFace):
     searchedFaceImg = face_recognition.load_image_file(searchedFace)
     searchedFaceEncoding = face_recognition.face_encodings(searchedFaceImg)[0]
-
     known_faces = [searchedFaceEncoding]
 
     # Initialize some variables

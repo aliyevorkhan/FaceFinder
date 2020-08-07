@@ -43,3 +43,58 @@ You can see matched face(s) and their similarity scores on image. Result page ou
 Additionally you can check previous results from Previous Results page. 
 
 ![PreviousResults](outputs/4.png)
+
+
+## How it works
+
+Basically this application include face recognition methods. The _face_recognition_ library provide this.
+
+Aplication workflow:
+
+1. Load searched face image file through _load_image_file()_ method.
+
+2. Encode face on uploaded image through _face_encodings_ method.
+```python 
+searchedFaceImg = face_recognition.load_image_file(searchedFace)
+searchedFaceEncoding = face_recognition.face_encodings(searchedFaceImg)[0]
+```
+3. Load group of faces image file using  **Pillow**, then convert color space From **BGR** to **RGB**.
+```python
+groupFaceImg = Image.open(groupFace)
+groupFaceImg = np.array(groupFaceImg)
+groupFaceImg = cv2.cvtColor(np.array(groupFaceImg), cv2.COLOR_BGR2RGB)
+```
+4. Find all the faces and face encodings in the current group of faces image.
+```python
+face_locations = face_recognition.face_locations(groupFaceImg)
+face_encodings = face_recognition.face_encodings(groupFaceImg, face_locations)
+```
+5. Get confidence of face using _face_distance()_ method.
+```python
+faceConfidence = face_recognition.face_distance(face_encodings, searchedFaceEncoding)    
+```
+6. Now we can calculate similarity score for each face easily. For calculate we using this basic formula:
+```python
+similarityScore = str(int((1-faceConfidence[count])*100))
+```
+This process happen in for loop for each face. The **count** value is temp varible for counting faces.
+7. Draw rectangle around of faces and putting the text of similarity score bottom.
+```python
+cv2.rectangle(groupFaceImg, (left, top), (right, bottom), color, 3)
+cv2.rectangle(groupFaceImg, (left, bottom - 40), (right, bottom), color, cv2.FILLED)
+font = cv2.FONT_HERSHEY_DUPLEX
+cv2.putText(groupFaceImg, similarityScore + " %", (left + 6, bottom - 6), font, 0.7, (255, 255, 255), 1)
+```
+8. After all processes we write result image to _static_ directory for storage. For get unique results we give name using _datetime_.
+```python
+cv2.imwrite("static/result" + datetime.utcnow().strftime('%B%d%Y%H%M%S') +".jpg", groupFaceImg)
+```
+9. Before the final step we encode image again using _base64_ for show result dynamically on Result Page.
+```python
+retval, buffer_img= cv2.imencode('.jpg', groupFaceImg)
+data = b64encode(buffer_img)
+```
+10. For final step we redirect result page template with given argument.
+```python
+return render_template("result.html", data=data)
+```
